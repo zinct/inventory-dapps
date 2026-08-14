@@ -1,66 +1,103 @@
-
 #![no_std]
-use soroban_sdk::{contract, contractimpl, contracttype, symbol_short, Env, String, Symbol, Vec};
 
-// Struktur data yang akan menyimpan notes
+use soroban_sdk::{
+    contract,
+    contractimpl,
+    contracttype,
+    symbol_short,
+    Env,
+    String,
+    Symbol,
+    Vec,
+};
+
+// Struktur data untuk menyimpan barang inventory
 #[contracttype]
 #[derive(Clone, Debug)]
-pub struct Note {
+pub struct InventoryItem {
     id: u64,
-    title: String,
-    content: String,
+    name: String,
+    quantity: u64,
+    price: u64,
+    description: String,
 }
 
-// Storage key untuk data notes
-const NOTE_DATA: Symbol = symbol_short!("NOTE_DATA");
+// Storage key untuk data inventory
+const INVENTORY_DATA: Symbol = symbol_short!("INVENTORY");
 
 #[contract]
-pub struct NotesContract;
+pub struct InventoryContract;
 
 #[contractimpl]
-impl NotesContract {
-    pub fn get_notes(env: Env) -> Vec<Note> {
-        // 1. ambil data notes dari storage
-        return env.storage().instance().get(&NOTE_DATA).unwrap_or(Vec::new(&env));
+impl InventoryContract {
+    // Fungsi untuk mengambil seluruh data inventory
+    pub fn get_inventory(env: Env) -> Vec<InventoryItem> {
+        env.storage()
+            .instance()
+            .get(&INVENTORY_DATA)
+            .unwrap_or(Vec::new(&env))
     }
 
-    // Fungsi untuk membuat note baru
-    pub fn create_note(env: Env, title: String, content: String) -> String {
-        // 1. ambil data notes dari storage
-        let mut notes: Vec<Note> = env.storage().instance().get(&NOTE_DATA).unwrap_or(Vec::new(&env));
-        
-        // 2. Buat object note baru
-        let note = Note {
+    // Fungsi untuk menambahkan barang baru
+    pub fn create_item(
+        env: Env,
+        name: String,
+        quantity: u64,
+        price: u64,
+        description: String,
+    ) -> String {
+        // 1. Ambil data inventory dari storage
+        let mut inventory: Vec<InventoryItem> = env
+            .storage()
+            .instance()
+            .get(&INVENTORY_DATA)
+            .unwrap_or(Vec::new(&env));
+
+        // 2. Buat object inventory baru
+        let item = InventoryItem {
             id: env.prng().gen::<u64>(),
-            title: title,
-            content: content,
+            name,
+            quantity,
+            price,
+            description,
         };
-        
-        // 3. tambahkan note baru ke notes lama
-        notes.push_back(note);
-        
-        // 4. simpan notes ke storage
-        env.storage().instance().set(&NOTE_DATA, &notes);
-        
-        return String::from_str(&env, "Notes berhasil ditambahkan");
+
+        // 3. Tambahkan barang ke inventory
+        inventory.push_back(item);
+
+        // 4. Simpan kembali inventory ke storage
+        env.storage()
+            .instance()
+            .set(&INVENTORY_DATA, &inventory);
+
+        String::from_str(&env, "Barang berhasil ditambahkan")
     }
 
-    // Fungsi untuk menghapus notes berdasarkan id
-    pub fn delete_note(env: Env, id: u64) -> String {
-        // 1. ambil data notes dari storage 
-        let mut notes: Vec<Note> = env.storage().instance().get(&NOTE_DATA).unwrap_or(Vec::new(&env));
+    // Fungsi untuk menghapus barang berdasarkan ID
+    pub fn delete_item(env: Env, id: u64) -> String {
+        // 1. Ambil data inventory
+        let mut inventory: Vec<InventoryItem> = env
+            .storage()
+            .instance()
+            .get(&INVENTORY_DATA)
+            .unwrap_or(Vec::new(&env));
 
-        // 2. cari index note yang akan dihapus menggunakan perulangan
-        for i in 0..notes.len() {
-            if notes.get(i).unwrap().id == id {
-                notes.remove(i);
+        // 2. Cari barang berdasarkan ID
+        for i in 0..inventory.len() {
+            if inventory.get(i).unwrap().id == id {
+                // 3. Hapus barang
+                inventory.remove(i);
 
-                env.storage().instance().set(&NOTE_DATA, &notes);
-                return String::from_str(&env, "Berhasil hapus notes");
+                // 4. Simpan perubahan
+                env.storage()
+                    .instance()
+                    .set(&INVENTORY_DATA, &inventory);
+
+                return String::from_str(&env, "Barang berhasil dihapus");
             }
         }
 
-        return String::from_str(&env, "Notes tidak ditemukan")
+        String::from_str(&env, "Barang tidak ditemukan")
     }
 }
 
