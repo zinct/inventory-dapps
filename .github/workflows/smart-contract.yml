@@ -5,19 +5,11 @@ on:
     branches:
       - main
       - master
-    paths:
-      - "contracts/**"
-      - "Cargo.toml"
-      - "Cargo.lock"
-      - "rust-toolchain.toml"
-      - ".github/workflows/smart-contract.yml"
   pull_request:
-    paths:
-      - "contracts/**"
-      - "Cargo.toml"
-      - "Cargo.lock"
-      - "rust-toolchain.toml"
-      - ".github/workflows/smart-contract.yml"
+    branches:
+      - main
+      - master
+  workflow_dispatch:
 
 concurrency:
   group: smart-contract-${{ github.workflow }}-${{ github.ref }}
