@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/stellar/stellar-protocol/master/core/logo.png" alt="Stellar" width="72" />
-</p>
-
 <h1 align="center">Stellar Inventory DApp</h1>
 
 <h3 align="center">Decentralized inventory management on Stellar Soroban.</h3>

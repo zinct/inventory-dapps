@@ -1,5 +1,3 @@
-import * as StellarSdk from "@stellar/stellar-sdk";
-
 export const CONTRACT_ID =
   process.env.NEXT_PUBLIC_CONTRACT_ID ??
   "CAJVFVM4DT6ZR634PU3MRFGP5FHDE5AAHCZXR4F54KWKZV25YQ7LYB2Z";
@@ -8,9 +6,7 @@ export const RPC_URL =
   process.env.NEXT_PUBLIC_SOROBAN_RPC_URL ??
   "https://soroban-testnet.stellar.org";
 
-export const NETWORK_PASSPHRASE = StellarSdk.Networks.TESTNET;
-
-export const rpc = new StellarSdk.rpc.Server(RPC_URL);
+export const NETWORK_PASSPHRASE = "Test SDF Network ; September 2015";
 
 export function formatPrice(price: bigint): string {
   return new Intl.NumberFormat("en-US", {
