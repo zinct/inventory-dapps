@@ -1,387 +1,378 @@
 # Stellar Inventory DApp
 
-**Stellar Inventory DApp** - Blockchain-Based Decentralized Inventory Management System
-
-## Project Description
-
-Stellar Inventory DApp is a decentralized inventory management solution built on the Stellar blockchain using the Soroban SDK. The system provides a blockchain-based platform for managing inventory data directly through a smart contract, reducing reliance on centralized database providers.
-
-The smart contract allows users to create, view, and delete inventory items. Each item contains essential information such as a unique ID, item name, quantity, price, and description. All inventory data is stored in the contract's instance storage, providing persistent and transparent data management on the Stellar network.
-
-The system is designed as a simple demonstration of how blockchain and Soroban smart contracts can be used to manage inventory data in a decentralized environment.
-
-## Project Vision
-
-Our vision is to demonstrate how decentralized technologies can improve the reliability, transparency, and ownership of inventory management systems by:
-
-* **Decentralizing Inventory Data**: Moving inventory records from centralized databases to blockchain-based storage
-* **Improving Data Transparency**: Providing verifiable inventory records stored on the Stellar blockchain
-* **Ensuring Data Integrity**: Using smart contracts to ensure inventory operations follow predefined rules
-* **Reducing Centralized Dependencies**: Minimizing reliance on centralized database infrastructure for core inventory records
-* **Building Trustless Systems**: Allowing inventory operations to be governed by smart contract logic rather than centralized application servers
-* **Enabling Blockchain-Based Inventory Management**: Demonstrating how Stellar and Soroban can be applied to real-world business use cases
-
-We envision a future where inventory systems can leverage blockchain technology to provide transparent, verifiable, and reliable records across organizations and stakeholders.
-
-## Key Features
-
-### 1. **Inventory Item Creation**
-
-* Create new inventory items through the smart contract
-* Specify item name, quantity, price, and description
-* Automatically generate a unique ID for each inventory item
-* Persist inventory data on the Stellar blockchain
-
-### 2. **Inventory Data Retrieval**
-
-* Retrieve all inventory items through a single contract function
-* Return structured inventory data for frontend applications
-* Access item information directly from the blockchain state
-* Keep inventory records synchronized with the current contract state
-
-### 3. **Inventory Item Deletion**
-
-* Delete inventory items using their unique IDs
-* Remove specific items from the contract storage
-* Automatically update the inventory collection after deletion
-* Prevent deletion of items that do not exist
-
-### 4. **Transparent Data Management**
-
-* Inventory records are stored on the Stellar blockchain
-* Contract operations can be verified through blockchain transactions
-* Inventory state is maintained by Soroban smart contract logic
-* Data operations follow predefined contract rules
-
-### 5. **Stellar Network Integration**
-
-* Built on the Stellar blockchain
-* Uses Soroban Smart Contracts for inventory management
-* Uses Rust and Soroban SDK for smart contract development
-* Provides a foundation for future blockchain-based inventory applications
-
-## Inventory Data Structure
-
-Each inventory item contains the following information:
-
-| Field         | Type     | Description                              |
-| ------------- | -------- | ---------------------------------------- |
-| `id`          | `u64`    | Unique identifier for the inventory item |
-| `name`        | `String` | Name of the inventory item               |
-| `quantity`    | `u64`    | Current quantity or stock                |
-| `price`       | `u64`    | Price of the inventory item              |
-| `description` | `String` | Description of the inventory item        |
-
-Example inventory item:
-
-```text
-ID          : 123456
-Name        : Laptop Lenovo
-Quantity    : 10
-Price       : 15000000
-Description : Laptop untuk kebutuhan operasional
-```
-
-## Smart Contract Functions
-
-The smart contract provides three main functions for managing inventory.
-
-### `create_item()`
-
-Creates a new inventory item.
-
-Parameters:
-
-```text
-name
-quantity
-price
-description
-```
-
-The function generates a unique ID, creates the inventory item, and stores it in the contract's inventory collection.
-
-### `get_inventory()`
-
-Retrieves all inventory items currently stored in the smart contract.
-
-The function returns a collection containing:
-
-```text
-id
-name
-quantity
-price
-description
-```
-
-### `delete_item()`
-
-Deletes an inventory item using its unique ID.
-
-Parameter:
-
-```text
-id
-```
-
-If the specified ID exists, the item is removed from the inventory collection. If the ID does not exist, the contract returns an appropriate message.
-
-## Contract Details
-
-* **Contract Address:** `CDTZOGX5XLXGP7GMGSMZ7L6NERYC2ZEQD7LAHHLNOQINQTD6ZNWEBMTS`
-* **Network:** Stellar Soroban
-* **Language:** Rust
-* **SDK:** Soroban SDK
-
-## Architecture
-
-The application follows a simple decentralized architecture:
-
-```text
-┌─────────────────────┐
-│     Frontend DApp   │
-└──────────┬──────────┘
-           │
-           │ Contract Calls
-           ▼
-┌─────────────────────┐
-│  Soroban Contract   │
-│                     │
-│  create_item()      │
-│  get_inventory()    │
-│  delete_item()      │
-└──────────┬──────────┘
-           │
-           │ Instance Storage
-           ▼
-┌─────────────────────┐
-│  Stellar Blockchain │
-│                     │
-│ Inventory Items     │
-└─────────────────────┘
-```
-
-The frontend communicates directly with the Soroban smart contract to perform inventory operations. The contract manages the inventory state and stores the data in its instance storage.
-
-## Future Scope
-
-### Short-Term Enhancements
-
-1. **Update Inventory Items**
-
-   * Allow existing inventory information to be updated
-   * Update item name, price, and description
-   * Modify inventory quantities
-
-2. **Stock Management**
-
-   * Add stock
-   * Remove stock
-   * Track stock movements
-   * Prevent stock quantities from becoming negative
-
-3. **Inventory Categories**
-
-   * Add categories for inventory items
-   * Organize products based on type
-   * Support category-based filtering
-
-4. **Search and Filtering**
-
-   * Search inventory by item name
-   * Filter items by category
-   * Filter items based on stock availability
-   * Sort items based on price or quantity
-
-### Medium-Term Development
-
-5. **Inventory History**
-
-   * Record inventory changes
-   * Track stock-in and stock-out operations
-   * Maintain transaction history
-
-6. **Role-Based Access Control**
-
-   * Define different roles for inventory management
-   * Support administrator and staff accounts
-   * Restrict specific inventory operations
-
-7. **Multi-User Inventory Management**
-
-   * Allow multiple Stellar addresses to manage inventory
-   * Implement permission-based access
-   * Support organization-level inventory management
-
-8. **Low Stock Notifications**
-
-   * Detect inventory items below a defined threshold
-   * Integrate with an off-chain notification service
-   * Provide alerts for inventory managers
-
-### Long-Term Vision
-
-9. **Multi-Organization Inventory**
-
-   * Support multiple organizations within the same platform
-   * Implement organization-level data isolation
-   * Enable decentralized inventory collaboration
-
-10. **Supply Chain Integration**
-
-    * Track inventory movement between organizations
-    * Record supplier and distributor information
-    * Provide transparent supply chain records
-
-11. **Blockchain-Based Product Tracking**
-
-    * Track products from suppliers to customers
-    * Record product ownership and movement
-    * Provide verifiable product history
-
-12. **Tokenized Inventory**
-
-    * Represent specific inventory assets using Stellar-based tokens
-    * Support token-based ownership or claims
-    * Integrate inventory records with Stellar assets
-
-13. **Inter-Contract Integration**
-
-    * Allow other Soroban smart contracts to interact with inventory data
-    * Integrate inventory with payment and marketplace contracts
-    * Enable automated inventory workflows
-
-14. **Analytics Dashboard**
-
-    * Display inventory statistics
-    * Track stock levels and inventory value
-    * Provide insights into inventory movements
-
-### Enterprise Features
-
-15. **Enterprise Inventory Management**
-
-    * Support large-scale inventory operations
-    * Manage inventory across multiple locations
-    * Provide organization-level access control
-
-16. **Audit Trail**
-
-    * Record inventory operations on-chain
-    * Provide verifiable transaction history
-    * Support audit and compliance requirements
-
-17. **Automated Inventory Operations**
-
-    * Trigger actions based on inventory conditions
-    * Automate stock replenishment workflows
-    * Integrate with external enterprise systems
-
-18. **Multi-Warehouse Support**
-
-    * Manage inventory across multiple warehouses
-    * Track stock by warehouse location
-    * Support inventory transfers between warehouses
-
-## Technical Requirements
-
-* Rust programming language
-* Soroban SDK
-* Stellar blockchain
-* Stellar Soroban-compatible wallet
-* Stellar CLI for contract deployment and interaction
-
-## Getting Started
-
-### 1. Clone the Repository
-
-```bash
-git clone <repository-url>
-cd <project-directory>
-```
-
-### 2. Build the Smart Contract
-
-Build the Soroban smart contract using Cargo:
-
-```bash
-cargo build --target wasm32-unknown-unknown --release
-```
-
-### 3. Deploy the Contract
-
-Deploy the compiled WebAssembly contract to the Stellar Soroban network using the Stellar CLI.
-
-### 4. Interact With the Contract
-
-The smart contract provides the following main functions:
-
-```text
-create_item()
-get_inventory()
-delete_item()
-```
-
-#### Create Inventory Item
-
-Provide:
-
-```text
-name
-quantity
-price
-description
-```
-
-Example:
-
-```text
-Name        : Laptop Lenovo
-Quantity    : 10
-Price       : 15000000
-Description : Laptop untuk kebutuhan operasional
-```
-
-#### Get Inventory
-
-Call:
-
-```text
-get_inventory()
-```
-
-This returns all inventory items currently stored by the contract.
-
-#### Delete Inventory Item
-
-Call:
-
-```text
-delete_item(id)
-```
-
-Provide the ID of the inventory item that should be removed.
-
-## Use Case
-
-The Stellar Inventory DApp can be used as a foundation for blockchain-based inventory management applications such as:
-
-* Retail inventory management
-* Warehouse management
-* Asset tracking
-* Supply chain tracking
-* Product ownership tracking
-* Decentralized marketplaces
-* Organization inventory management
-* On-chain audit systems
-
-## Why Stellar?
-
-Stellar provides an efficient foundation for decentralized applications that require fast and low-cost transactions. Combined with Soroban smart contracts, developers can build programmable applications that store and manage data directly on the Stellar network.
-
-For inventory management, this provides an opportunity to create transparent and verifiable inventory records while maintaining the flexibility to integrate with other Stellar-based applications and assets.
+Decentralized inventory management built on **Stellar Soroban** with a **Next.js** frontend, **Freighter** wallet integration, and **GitHub Actions** CI for smart contract testing.
 
 ---
 
-**Stellar Inventory DApp** - Decentralizing Inventory Management with Stellar & Soroban
+## Level 3 Submission Checklist
+
+| Requirement | Status | Details |
+| --- | --- | --- |
+| Complete README documentation | ✅ | This document |
+| 10+ meaningful commits | ⏳ | See [Commit History](#commit-history) |
+| Live demo link | ⏳ | [Placeholder — update before submission](#live-demo) |
+| Contract deployment address | ✅ | `CAJVFVM4DT6ZR634PU3MRFGP5FHDE5AAHCZXR4F54KWKZV25YQ7LYB2Z` |
+| Transaction hash (contract interaction) | ⏳ | [Placeholder — update before submission](#on-chain-verification) |
+| Mobile responsive UI screenshot | ✅ | [`docs/mobile.png`](./docs/mobile.png) |
+| CI/CD pipeline screenshot | ⏳ | Add image to `docs/ci.png` |
+| Test output (3+ passing tests) | ✅ | 4 passing unit tests — see [Test Results](#test-results) |
+
+---
+
+## Live Demo
+
+> **Placeholder:** Replace the URL below with your deployed frontend (Vercel, Netlify, etc.)
+
+**Demo URL:** `https://your-demo-url.vercel.app`
+
+**Network:** Stellar Testnet  
+**Wallet required for writes:** [Freighter](https://www.freighter.app/)
+
+---
+
+## On-Chain Verification
+
+### Contract Deployment
+
+| Field | Value |
+| --- | --- |
+| **Network** | Stellar Soroban Testnet |
+| **Contract ID** | `CAJVFVM4DT6ZR634PU3MRFGP5FHDE5AAHCZXR4F54KWKZV25YQ7LYB2Z` |
+| **Explorer** | [View on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CAJVFVM4DT6ZR634PU3MRFGP5FHDE5AAHCZXR4F54KWKZV25YQ7LYB2Z) |
+| **RPC URL** | `https://soroban-testnet.stellar.org` |
+
+### Transaction Hashes
+
+> **Placeholder:** Replace the hashes below with your actual on-chain transaction hashes.
+
+| Action | Transaction Hash | Explorer |
+| --- | --- | --- |
+| Contract deploy | `YOUR_DEPLOY_TX_HASH` | [View on Stellar Expert](https://stellar.expert/explorer/testnet/tx/YOUR_DEPLOY_TX_HASH) |
+| `create_item` | `YOUR_CREATE_ITEM_TX_HASH` | [View on Stellar Expert](https://stellar.expert/explorer/testnet/tx/YOUR_CREATE_ITEM_TX_HASH) |
+| `delete_item` | `YOUR_DELETE_ITEM_TX_HASH` | [View on Stellar Expert](https://stellar.expert/explorer/testnet/tx/YOUR_DELETE_ITEM_TX_HASH) |
+
+---
+
+## Screenshots
+
+### Web UI (Desktop)
+
+![Web UI](./docs/web.png)
+
+### Mobile Responsive UI
+
+![Mobile UI](./docs/mobile.png)
+
+### CI/CD Pipeline
+
+> **Placeholder:** Capture a screenshot of a successful GitHub Actions run and save it as `docs/ci.png`.
+
+![CI/CD Pipeline](./docs/ci.png)
+
+### Test Output (4 Passing Tests)
+
+> **Placeholder:** Optionally add a terminal/CI screenshot as `docs/tests.png`. The output below is from `cargo test`.
+
+![Test Output](./docs/tests.png)
+
+```text
+running 4 tests
+test test::get_inventory_returns_empty_initially ... ok
+test test::delete_item_returns_not_found_for_missing_id ... ok
+test test::delete_item_removes_matching_entry ... ok
+test test::create_item_adds_inventory_entry ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```
+
+---
+
+## Project Overview
+
+Stellar Inventory DApp is a full-stack decentralized application that stores inventory records on-chain using a Soroban smart contract. Users can:
+
+- **View** all inventory items (no wallet required)
+- **Create** new items (wallet required)
+- **Delete** items by ID (wallet required)
+
+The frontend is a minimal black-and-white Next.js app connected to the contract via TypeScript bindings and the Stellar JS SDK.
+
+---
+
+## Architecture
+
+```text
+┌──────────────────────────────┐
+│   Next.js Frontend (React)   │
+│   Freighter Wallet           │
+└──────────────┬───────────────┘
+               │ Soroban RPC + signed txs
+               ▼
+┌──────────────────────────────┐
+│   InventoryContract (Rust)   │
+│   create_item()              │
+│   get_inventory()            │
+│   delete_item()              │
+└──────────────┬───────────────┘
+               │ Instance storage
+               ▼
+┌──────────────────────────────┐
+│   Stellar Soroban Testnet    │
+└──────────────────────────────┘
+```
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+| --- | --- |
+| Smart contract | Rust, Soroban SDK v25 |
+| Frontend | Next.js 16, React 19, Tailwind CSS 4 |
+| Blockchain SDK | `@stellar/stellar-sdk`, `@stellar/freighter-api` |
+| Contract bindings | Generated via `stellar contract bindings typescript` |
+| CI/CD | GitHub Actions (`.github/workflows/smart-contract.yml`) |
+| Package manager | npm (frontend), Cargo (contracts) |
+
+---
+
+## Smart Contract
+
+### Data Structure
+
+```rust
+pub struct InventoryItem {
+    id: u64,
+    name: String,
+    quantity: u64,
+    price: u64,
+    description: String,
+}
+```
+
+### Functions
+
+| Function | Parameters | Returns | Description |
+| --- | --- | --- | --- |
+| `get_inventory` | — | `Vec<InventoryItem>` | Returns all stored items |
+| `create_item` | `name`, `quantity`, `price`, `description` | `String` | Adds a new item with a random ID |
+| `delete_item` | `id` | `String` | Removes an item by ID |
+
+### Response Messages
+
+| Scenario | Message |
+| --- | --- |
+| Item created | `Item added successfully` |
+| Item deleted | `Item deleted successfully` |
+| Item not found | `Item not found` |
+
+---
+
+## Frontend Features
+
+- Minimalist white/black UI
+- Freighter wallet connect / disconnect with shared global state
+- Read-only inventory list without login
+- Wallet-gated create and delete actions with visual feedback
+- Distinct button colors and cursor states
+- Mobile-responsive layout
+
+---
+
+## Project Structure
+
+```text
+inventory-dapps/
+├── .github/workflows/
+│   └── smart-contract.yml      # CI: build + test contract
+├── contracts/notes/
+│   └── src/
+│       ├── lib.rs                # Smart contract
+│       └── test.rs               # Unit tests (4 tests)
+├── docs/
+│   ├── web.png                   # Desktop screenshot
+│   ├── mobile.png                # Mobile screenshot
+│   ├── ci.png                    # CI screenshot (add before submission)
+│   └── tests.png                 # Test screenshot (optional)
+├── lib/bindings/                 # Generated TypeScript contract bindings
+├── src/
+│   ├── app/                      # Next.js App Router
+│   ├── components/               # UI components
+│   ├── hooks/                    # React hooks
+│   ├── lib/                      # Stellar + contract client
+│   └── providers/                # Freighter context provider
+├── .env.example                  # Environment variables template
+├── Cargo.toml                    # Rust workspace
+└── package.json                  # Frontend dependencies
+```
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) 22+
+- [Rust](https://rustup.rs/)
+- [Stellar CLI](https://developers.stellar.org/docs/tools/cli/install-cli) v25+
+- [Freighter](https://www.freighter.app/) browser extension (for write operations)
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/zinct/inventory-dapps.git
+cd inventory-dapps
+```
+
+### 2. Environment setup
+
+```bash
+cp .env.example .env.local
+```
+
+| Variable | Description |
+| --- | --- |
+| `NEXT_PUBLIC_STELLAR_NETWORK` | `testnet` |
+| `NEXT_PUBLIC_SOROBAN_RPC_URL` | Soroban RPC endpoint |
+| `NEXT_PUBLIC_CONTRACT_ID` | Deployed contract address |
+
+### 3. Build and test the smart contract
+
+```bash
+rustup target add wasm32v1-none
+stellar contract build
+cargo test
+```
+
+### 4. Run the frontend
+
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+### 5. Connect wallet and interact
+
+1. Install Freighter and switch to **Testnet**
+2. Fund your account via [Friendbot](https://laboratory.stellar.org/#account-creator?network=test)
+3. Click **Connect Wallet** in the app header
+4. Add or delete inventory items
+
+---
+
+## CI/CD
+
+The GitHub Actions workflow runs on every push/PR that touches contract files:
+
+**Workflow file:** `.github/workflows/smart-contract.yml`
+
+| Step | Description |
+| --- | --- |
+| Install Rust + `wasm32v1-none` | Build target for Soroban |
+| Install Stellar CLI v25.2.0 | Official CLI action |
+| `cargo fmt --check` | Formatting validation |
+| `stellar contract build` | Compile WASM |
+| `cargo test --workspace` | Run all contract unit tests |
+
+---
+
+## Test Results
+
+The smart contract includes **4 unit tests** covering core functionality:
+
+| Test | Description |
+| --- | --- |
+| `get_inventory_returns_empty_initially` | Empty state on fresh contract |
+| `create_item_adds_inventory_entry` | Create flow and field persistence |
+| `delete_item_removes_matching_entry` | Delete by ID |
+| `delete_item_returns_not_found_for_missing_id` | Error handling for missing ID |
+
+Run locally:
+
+```bash
+cargo test
+```
+
+---
+
+## Commit History
+
+> **Note:** Level 3 requires **10+ meaningful commits**. Ensure your repository history includes granular commits for the work below before final submission.
+
+| # | Type | Description |
+| --- | --- | --- |
+| 1 | `feat` | Initialize Soroban inventory smart contract |
+| 2 | `feat` | Implement `create_item`, `get_inventory`, `delete_item` |
+| 3 | `test` | Add unit tests for all contract functions |
+| 4 | `ci` | Add GitHub Actions workflow for contract build and test |
+| 5 | `feat` | Scaffold Next.js frontend at project root |
+| 6 | `feat` | Generate TypeScript contract bindings |
+| 7 | `feat` | Integrate Freighter wallet connection |
+| 8 | `feat` | Build inventory list, create form, and delete actions |
+| 9 | `style` | Apply minimalist UI with button feedback and auth gating |
+| 10 | `fix` | Share wallet state via React Context provider |
+| 11 | `docs` | Update README for Level 3 submission requirements |
+
+---
+
+## Deploy Frontend (Vercel)
+
+```bash
+npm run build
+```
+
+Set these environment variables in your hosting dashboard:
+
+```env
+NEXT_PUBLIC_STELLAR_NETWORK=testnet
+NEXT_PUBLIC_SOROBAN_RPC_URL=https://soroban-testnet.stellar.org
+NEXT_PUBLIC_CONTRACT_ID=CAJVFVM4DT6ZR634PU3MRFGP5FHDE5AAHCZXR4F54KWKZV25YQ7LYB2Z
+```
+
+---
+
+## Deploy / Upgrade Contract
+
+```bash
+cd contracts/notes
+stellar contract build
+
+stellar contract deploy \
+  --wasm ../../target/wasm32v1-none/release/notes.wasm \
+  --network testnet \
+  --source YOUR_KEY_NAME
+```
+
+After deploying, update `NEXT_PUBLIC_CONTRACT_ID` in `.env.local` and regenerate bindings:
+
+```bash
+stellar contract bindings typescript \
+  --contract-id YOUR_NEW_CONTRACT_ID \
+  --network testnet \
+  --output-dir lib/bindings \
+  --overwrite
+
+npm run build:bindings
+```
+
+---
+
+## Future Improvements
+
+- Update existing inventory items
+- Role-based access control
+- Inventory categories and search
+- On-chain event indexing
+- Multi-warehouse support
+
+---
+
+## License
+
+Apache-2.0 (Stellar ecosystem standard)
+
+---
+
+**Stellar Inventory DApp** — Decentralizing inventory management with Stellar & Soroban
