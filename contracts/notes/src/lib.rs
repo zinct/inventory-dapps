@@ -1,15 +1,6 @@
 #![no_std]
 
-use soroban_sdk::{
-    contract,
-    contractimpl,
-    contracttype,
-    symbol_short,
-    Env,
-    String,
-    Symbol,
-    Vec,
-};
+use soroban_sdk::{contract, contractimpl, contracttype, symbol_short, Env, String, Symbol, Vec};
 
 // Struktur data untuk menyimpan barang inventory
 #[contracttype]
@@ -66,11 +57,9 @@ impl InventoryContract {
         inventory.push_back(item);
 
         // 4. Simpan kembali inventory ke storage
-        env.storage()
-            .instance()
-            .set(&INVENTORY_DATA, &inventory);
+        env.storage().instance().set(&INVENTORY_DATA, &inventory);
 
-        String::from_str(&env, "Barang berhasil ditambahkan")
+        String::from_str(&env, "Item added successfully")
     }
 
     // Fungsi untuk menghapus barang berdasarkan ID
@@ -89,15 +78,13 @@ impl InventoryContract {
                 inventory.remove(i);
 
                 // 4. Simpan perubahan
-                env.storage()
-                    .instance()
-                    .set(&INVENTORY_DATA, &inventory);
+                env.storage().instance().set(&INVENTORY_DATA, &inventory);
 
-                return String::from_str(&env, "Barang berhasil dihapus");
+                return String::from_str(&env, "Item deleted successfully");
             }
         }
 
-        String::from_str(&env, "Barang tidak ditemukan")
+        String::from_str(&env, "Item not found")
     }
 }
 
