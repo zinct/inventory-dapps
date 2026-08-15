@@ -1,6 +1,39 @@
-# Stellar Inventory DApp
+<p align="center">
+  <img src="https://raw.githubusercontent.com/stellar/stellar-protocol/master/core/logo.png" alt="Stellar" width="72" />
+</p>
 
-Decentralized inventory management built on **Stellar Soroban** with a **Next.js** frontend, **Freighter** wallet integration, and **GitHub Actions** CI for smart contract testing.
+<h1 align="center">Stellar Inventory DApp</h1>
+
+<h3 align="center">Decentralized inventory management on Stellar Soroban.</h3>
+
+<p align="center">
+  Build, manage, and verify inventory records on-chain with a Rust smart contract,<br />
+  a Next.js frontend, Freighter wallet integration, and automated contract testing.
+</p>
+
+<p align="center">
+  <a href="https://stellar.org"><img src="https://img.shields.io/badge/Stellar-7D00FF?style=for-the-badge&logo=stellar&logoColor=white" alt="Stellar" /></a>
+  <a href="https://developers.stellar.org/docs/build/smart-contracts"><img src="https://img.shields.io/badge/Soroban-000000?style=for-the-badge&logo=rust&logoColor=white" alt="Soroban" /></a>
+  <a href="https://www.rust-lang.org/"><img src="https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white" alt="Rust" /></a>
+  <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js" /></a>
+  <a href="https://github.com/zinct/inventory-dapps/actions"><img src="https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" alt="CI" /></a>
+  <a href="https://developers.stellar.org/docs/networks"><img src="https://img.shields.io/badge/Network-Testnet-14B6A6?style=for-the-badge&logo=stellar&logoColor=white" alt="Testnet" /></a>
+</p>
+
+<p align="center">
+  <a href="#level-3-submission-checklist">Level 3 Checklist</a> ·
+  <a href="#live-demo">Live Demo</a> ·
+  <a href="#screenshots">Screenshots</a> ·
+  <a href="#getting-started">Getting Started</a> ·
+  <a href="#smart-contract">Smart Contract</a> ·
+  <a href="#ci-cd">CI/CD</a> ·
+  <a href="#test-results">Test Results</a>
+</p>
+
+<p align="center">
+  <strong>Repository:</strong> <a href="https://github.com/zinct/inventory-dapps">zinct/inventory-dapps</a><br />
+  <strong>Contract:</strong> <code>CAJVFVM4DT6ZR634PU3MRFGP5FHDE5AAHCZXR4F54KWKZV25YQ7LYB2Z</code>
+</p>
 
 ---
 
@@ -12,10 +45,9 @@ Decentralized inventory management built on **Stellar Soroban** with a **Next.js
 | 10+ meaningful commits | ⏳ | See [Commit History](#commit-history) |
 | Live demo link | ⏳ | [Placeholder — update before submission](#live-demo) |
 | Contract deployment address | ✅ | `CAJVFVM4DT6ZR634PU3MRFGP5FHDE5AAHCZXR4F54KWKZV25YQ7LYB2Z` |
-| Transaction hash (contract interaction) | ⏳ | [Placeholder — update before submission](#on-chain-verification) |
 | Mobile responsive UI screenshot | ✅ | [`docs/mobile.png`](./docs/mobile.png) |
 | CI/CD pipeline screenshot | ⏳ | Add image to `docs/ci.png` |
-| Test output (3+ passing tests) | ✅ | 4 passing unit tests — see [Test Results](#test-results) |
+| Test output (3+ passing tests) | ✅ | [`docs/test.png`](./docs/test.png) — 4 passing unit tests |
 
 ---
 
@@ -41,16 +73,6 @@ Decentralized inventory management built on **Stellar Soroban** with a **Next.js
 | **Explorer** | [View on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CAJVFVM4DT6ZR634PU3MRFGP5FHDE5AAHCZXR4F54KWKZV25YQ7LYB2Z) |
 | **RPC URL** | `https://soroban-testnet.stellar.org` |
 
-### Transaction Hashes
-
-> **Placeholder:** Replace the hashes below with your actual on-chain transaction hashes.
-
-| Action | Transaction Hash | Explorer |
-| --- | --- | --- |
-| Contract deploy | `YOUR_DEPLOY_TX_HASH` | [View on Stellar Expert](https://stellar.expert/explorer/testnet/tx/YOUR_DEPLOY_TX_HASH) |
-| `create_item` | `YOUR_CREATE_ITEM_TX_HASH` | [View on Stellar Expert](https://stellar.expert/explorer/testnet/tx/YOUR_CREATE_ITEM_TX_HASH) |
-| `delete_item` | `YOUR_DELETE_ITEM_TX_HASH` | [View on Stellar Expert](https://stellar.expert/explorer/testnet/tx/YOUR_DELETE_ITEM_TX_HASH) |
-
 ---
 
 ## Screenshots
@@ -71,9 +93,7 @@ Decentralized inventory management built on **Stellar Soroban** with a **Next.js
 
 ### Test Output (4 Passing Tests)
 
-> **Placeholder:** Optionally add a terminal/CI screenshot as `docs/tests.png`. The output below is from `cargo test`.
-
-![Test Output](./docs/tests.png)
+![Test Output](./docs/test.png)
 
 ```text
 running 4 tests
@@ -192,8 +212,8 @@ inventory-dapps/
 ├── docs/
 │   ├── web.png                   # Desktop screenshot
 │   ├── mobile.png                # Mobile screenshot
-│   ├── ci.png                    # CI screenshot (add before submission)
-│   └── tests.png                 # Test screenshot (optional)
+│   ├── test.png                  # Test output screenshot
+│   └── ci.png                    # CI screenshot (add before submission)
 ├── lib/bindings/                 # Generated TypeScript contract bindings
 ├── src/
 │   ├── app/                      # Next.js App Router

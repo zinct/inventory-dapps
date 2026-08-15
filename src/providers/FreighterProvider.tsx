@@ -16,6 +16,7 @@ import {
   requestAccess,
   signTransaction,
 } from "@stellar/freighter-api";
+import type { SignTransaction } from "@stellar/stellar-sdk/contract";
 import { NETWORK_PASSPHRASE } from "@/lib/stellar";
 
 interface FreighterContextValue {
@@ -26,10 +27,7 @@ interface FreighterContextValue {
   loading: boolean;
   connect: () => Promise<string>;
   disconnect: () => void;
-  sign: (
-    xdr: string,
-    opts?: { networkPassphrase?: string },
-  ) => Promise<{ signedTxXdr: string; error?: { message: string } }>;
+  sign: SignTransaction;
   refresh: () => Promise<void>;
 }
 
@@ -123,21 +121,30 @@ export function FreighterProvider({ children }: { children: ReactNode }) {
     setNetwork(null);
   }, []);
 
-  const sign = useCallback(
-    async (xdr: string, opts?: { networkPassphrase?: string }) => {
+  const sign = useCallback<SignTransaction>(
+    async (xdr, opts) => {
       if (!connected) {
         throw new Error("Wallet is not connected");
       }
 
-      const { signedTxXdr, error } = await signTransaction(xdr, {
+      const result = await signTransaction(xdr, {
         networkPassphrase: opts?.networkPassphrase ?? NETWORK_PASSPHRASE,
+        address: opts?.address,
       });
 
-      if (error) {
-        return { signedTxXdr: "", error };
+      if (result.error) {
+        return {
+          signedTxXdr: result.signedTxXdr,
+          signerAddress: result.signerAddress,
+          error: {
+            message: result.error.message,
+            code: result.error.code,
+            ext: result.error.ext,
+          },
+        };
       }
 
-      return { signedTxXdr };
+      return result;
     },
     [connected],
   );
