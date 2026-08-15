@@ -1,10 +1,9 @@
+export const STELLAR_NETWORK = "testnet" as const;
+
 export const CONTRACT_ID =
-  process.env.NEXT_PUBLIC_CONTRACT_ID ??
   "CAJVFVM4DT6ZR634PU3MRFGP5FHDE5AAHCZXR4F54KWKZV25YQ7LYB2Z";
 
-export const RPC_URL =
-  process.env.NEXT_PUBLIC_SOROBAN_RPC_URL ??
-  "https://soroban-testnet.stellar.org";
+export const RPC_URL = "https://soroban-testnet.stellar.org";
 
 export const NETWORK_PASSPHRASE = "Test SDF Network ; September 2015";
 

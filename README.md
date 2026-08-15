@@ -215,9 +215,8 @@ inventory-dapps/
 │   ├── app/                      # Next.js App Router
 │   ├── components/               # UI components
 │   ├── hooks/                    # React hooks
-│   ├── lib/                      # Stellar + contract client
+│   ├── lib/                      # Stellar constants + contract client
 │   └── providers/                # Freighter context provider
-├── .env.example                  # Environment variables template
 ├── Cargo.toml                    # Rust workspace
 └── package.json                  # Frontend dependencies
 ```
@@ -240,19 +239,7 @@ git clone https://github.com/zinct/inventory-dapps.git
 cd inventory-dapps
 ```
 
-### 2. Environment setup
-
-```bash
-cp .env.example .env.local
-```
-
-| Variable | Description |
-| --- | --- |
-| `NEXT_PUBLIC_STELLAR_NETWORK` | `testnet` |
-| `NEXT_PUBLIC_SOROBAN_RPC_URL` | Soroban RPC endpoint |
-| `NEXT_PUBLIC_CONTRACT_ID` | Deployed contract address |
-
-### 3. Build and test the smart contract
+### 2. Build and test the smart contract
 
 ```bash
 rustup target add wasm32v1-none
@@ -260,7 +247,7 @@ stellar contract build
 cargo test
 ```
 
-### 4. Run the frontend
+### 3. Run the frontend
 
 ```bash
 npm install
@@ -269,7 +256,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-### 5. Connect wallet and interact
+### 4. Connect wallet and interact
 
 1. Install Freighter and switch to **Testnet**
 2. Fund your account via [Friendbot](https://laboratory.stellar.org/#account-creator?network=test)
@@ -339,13 +326,7 @@ cargo test
 npm run build
 ```
 
-Set these environment variables in your hosting dashboard:
-
-```env
-NEXT_PUBLIC_STELLAR_NETWORK=testnet
-NEXT_PUBLIC_SOROBAN_RPC_URL=https://soroban-testnet.stellar.org
-NEXT_PUBLIC_CONTRACT_ID=CAJVFVM4DT6ZR634PU3MRFGP5FHDE5AAHCZXR4F54KWKZV25YQ7LYB2Z
-```
+Network and contract settings are hardcoded in `src/lib/stellar.ts` for Stellar testnet, so no environment variables are required on Vercel.
 
 ---
 
@@ -361,7 +342,7 @@ stellar contract deploy \
   --source YOUR_KEY_NAME
 ```
 
-After deploying, update `NEXT_PUBLIC_CONTRACT_ID` in `.env.local` and regenerate bindings:
+After deploying, update `CONTRACT_ID` in `src/lib/stellar.ts` and regenerate bindings:
 
 ```bash
 stellar contract bindings typescript \
